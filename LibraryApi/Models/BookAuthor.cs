@@ -10,7 +10,6 @@ namespace LibraryApi.Models
 
         public int CompareTo(BookAuthor? other)
         {
-            // Сравниваем с null, считаем, что текущий объект больше.
             if (other == null) 
                 return 1;
 

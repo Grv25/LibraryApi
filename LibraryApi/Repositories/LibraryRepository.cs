@@ -1,6 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿using LibraryApi.Models;
+using System.Collections.Concurrent;
 
-namespace LibraryApi.Models
+namespace LibraryApi.Repositories
 {
     public class LibraryRepository : ILibraryRepository
     {
@@ -24,16 +25,13 @@ namespace LibraryApi.Models
         {
             book.Id = Guid.NewGuid().ToString();
 
-            // Проверка на наличие автора.
             var existingAuthor = _authors.Values.FirstOrDefault(a => a.FullName == book.Author.FullName);
             if (existingAuthor != null)
             {
-                // Привязываем книгу к существующему автору.
-                book.Author = existingAuthor; 
+                book.Author = existingAuthor;
             }
             else
             {
-                // Добавляем нового автора, если его нет.
                 book.Author.Id = Guid.NewGuid().ToString();
                 _authors[book.Author.Id] = book.Author;
             }
@@ -54,7 +52,7 @@ namespace LibraryApi.Models
             _books.TryRemove(key, out book);
             return book;
         }
-        
+
         public void Update(Book book)
         {
             _books[book.Id] = book;

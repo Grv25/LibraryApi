@@ -1,4 +1,6 @@
-﻿namespace LibraryApi.Models
+﻿using LibraryApi.Models;
+
+namespace LibraryApi.Repositories
 {
     public interface ILibraryRepository
     {
